@@ -23,8 +23,7 @@
   "license": "UNLICENSED",
   "author": {
     "name": "Daniel Metcalfe",
-    "email": "mrdanielmetcalfe@gmail.com",
-    "url": "http://danielmetcalfe.rocks/"
+    "email": "mrdanielmetcalfe@gmail.com"
   },
   "scripts": {
     "ci-like": "yarn workspace @peoplenotplatforms/client build && yarn lint && CI=true yarn workspaces run test && CI=true start-server-and-test heroku-like http://localhost:4000",
