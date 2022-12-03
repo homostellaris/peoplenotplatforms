@@ -23,6 +23,7 @@ yarn-error.log*
 
 build/
 
-# cypress
 cypress/videos/
 cypress/screenshots/
+
+.vercel

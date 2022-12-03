@@ -13,9 +13,9 @@ describe('Database search performance', () => {
     const databaseClient = await setupDatabaseAndGetClient()
     db = databaseClient.db
 
-    await db.dropDatabase()
-    await db.createCollection('people')
-    peopleCollection = db.collection('people')
+    await db('peoplenotplatforms').dropDatabase()
+    await db('peoplenotplatforms').createCollection('people')
+    peopleCollection = db('peoplenotplatforms').collection('people')
 
     // TODO: Replace with Cypress plugin
     const people = []

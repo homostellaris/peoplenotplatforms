@@ -6,7 +6,7 @@ async function resetDatabase(databaseUrl) {
     throw new Error('Unsafe to reset database in production.')
   }
 
-  const mongoClient = MongoClient(databaseUrl || process.env.MONGODB_URI)
+  const mongoClient = new MongoClient(databaseUrl || process.env.MONGODB_URI)
   await mongoClient.connect()
 
   try {

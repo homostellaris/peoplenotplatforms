@@ -10,7 +10,9 @@ let peopleIds
 beforeAll(async () => {
   await resetDatabase()
   databaseClient = await new DatabaseClient(process.env.MONGODB_URI).connect()
-  peopleCollection = databaseClient.db.collection('people')
+  peopleCollection = databaseClient
+    .db('peoplenotplatforms')
+    .collection('people')
 
   const people = []
   for (let i = 1; i <= 10; i++) {

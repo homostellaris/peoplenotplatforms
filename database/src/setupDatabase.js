@@ -1,5 +1,6 @@
 module.exports = async function(db) {
-  await db.createCollection('people')
+  // TODO: Fix this causing NamespaceExists error.
+  // await db.createCollection('people')
   await db.command({
     collMod: 'people',
     validator: {

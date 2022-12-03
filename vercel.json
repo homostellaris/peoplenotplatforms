@@ -1,0 +1,15 @@
+{
+  "devCommand": "yarn workspace @peoplenotplatforms/client start",
+  "buildCommand": "yarn workspace @peoplenotplatforms/client build",
+  "outputDirectory": "client/build",
+  "rewrites": [
+    {
+      "source": "/login",
+      "destination": "/api/login"
+    },
+    {
+      "source": "/graphql",
+      "destination": "/api/graphql"
+    }
+  ]
+}

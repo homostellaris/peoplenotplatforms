@@ -12,10 +12,9 @@ const resetDatabase = require('../../database/src/resetDatabase')
 const DatabaseClient = require('../../database/src/DatabaseClient')
 const fs = require('fs')
 const createPeople = require('./createPeople')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo')
 var signature = require('cookie-signature')
-const PeopleDataSource = require('../../people/src/dataSources/PeopleDataSource')
+const PeopleDataSource = require('../../people/src/graphql/dataSources/PeopleDataSource')
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
@@ -67,7 +66,7 @@ module.exports = async (on, config) => {
     },
     async createSession(sessionData) {
       // TODO: Stop this creating two redundant sessions.
-      const mongoStore = new MongoStore({ client: databaseClient.client })
+      const mongoStore = MongoStore.create({ client: databaseClient.client })
       await mongoStore.set('fakeSessionId', {
         cookie: {
           httpOnly: true,

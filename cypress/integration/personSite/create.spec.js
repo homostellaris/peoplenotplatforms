@@ -1,4 +1,4 @@
-import pathRegexes from '../../../people/src/pathRegexes'
+import pathRegexes from './pathRegexes'
 
 beforeEach(function() {
   cy.task('resetDatabase')

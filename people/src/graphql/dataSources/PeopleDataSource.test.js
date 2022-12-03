@@ -170,7 +170,9 @@ describe('edit person', () => {
   describe('when the object is valid', () => {
     it('returns an object', async () => {
       dan.popularity = 1
-      const peopleCollection = databaseClient.db.collection('people')
+      const peopleCollection = databaseClient
+        .db('peoplenotplatforms')
+        .collection('people')
       const { insertedId } = await peopleCollection.insertOne({
         ...dan,
         creator: 'fakeUserId'

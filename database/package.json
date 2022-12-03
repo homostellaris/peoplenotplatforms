@@ -11,12 +11,11 @@
   },
   "author": {
     "name": "Daniel Metcalfe",
-    "email": "mrdanielmetcalfe@gmail.com",
-    "url": "http://danielmetcalfe.rocks/"
+    "email": "mrdanielmetcalfe@gmail.com"
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "mongodb": "^3.3.1",
+    "mongodb": "^4.12.1",
     "mongodb-uri": "^0.9.7"
   },
   "devDependencies": {

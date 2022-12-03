@@ -46,7 +46,9 @@ async function updatePopularities(peopleIdsOrderedByVisits) {
   const databaseClient = await new DatabaseClient(
     process.env.MONGODB_URI
   ).connect()
-  const peopleCollection = databaseClient.db.collection('people')
+  const peopleCollection = databaseClient
+    .db('peoplenotplatforms')
+    .collection('people')
 
   const writeOperations = peopleIdsOrderedByVisits.map((personId, index) => ({
     updateOne: {
