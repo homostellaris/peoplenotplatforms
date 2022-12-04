@@ -8,6 +8,10 @@
       "destination": "/api/login"
     },
     {
+      "source": "/logout",
+      "destination": "/api/logout"
+    },
+    {
       "source": "/graphql",
       "destination": "/api/graphql"
     }

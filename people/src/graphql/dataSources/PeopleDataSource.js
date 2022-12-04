@@ -27,18 +27,15 @@ class PeopleDataSource extends DataSource {
   }
 
   async editPerson(id, person) {
-    const result = await this.collection.findOneAndUpdate(
+    await this.collection.updateOne(
       { _id: new ObjectID(id) },
-      { $set: { ...person } },
-      { returnOriginal: false }
+      { $set: { ...person } }
     )
 
-    if (result.modifiedCount < 1) {
-      throw new Error('The edit had no effect!')
-    }
-
-    const editedPerson = result.value
-    return replaceMongoIdWithApplicationId(editedPerson)
+    return replaceMongoIdWithApplicationId({
+      ...person,
+      _id: id
+    })
   }
 
   async getPeople(query, resultsPerPage, startingPopularity = 1) {

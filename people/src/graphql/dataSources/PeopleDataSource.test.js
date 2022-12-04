@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const DatabaseClient = require('@peoplenotplatforms/database/src/DatabaseClient')
+const database = require('@peoplenotplatforms/database')
 const resetDatabase = require('@peoplenotplatforms/database/src/resetDatabase')
 const PeopleDataSource = require('./PeopleDataSource')
 
@@ -11,8 +11,7 @@ let elon
 let dan
 
 beforeAll(async () => {
-  databaseClient = new DatabaseClient(process.env.MONGODB_URI)
-  await databaseClient.connect()
+  databaseClient = await database()
   db = databaseClient.db
   peopleDataSource = new PeopleDataSource(db)
 })
@@ -26,13 +25,15 @@ beforeEach(async () => {
 
   dan = JSON.parse(
     fs.readFileSync(
-      path.resolve(`${__dirname}/../../../cypress/fixtures/people/dan.json`),
+      path.resolve(`${__dirname}/../../../../cypress/fixtures/people/dan.json`),
       'utf8'
     )
   )
   elon = JSON.parse(
     fs.readFileSync(
-      path.resolve(`${__dirname}/../../../cypress/fixtures/people/elon.json`),
+      path.resolve(
+        `${__dirname}/../../../../cypress/fixtures/people/elon.json`
+      ),
       'utf8'
     )
   )
@@ -170,9 +171,7 @@ describe('edit person', () => {
   describe('when the object is valid', () => {
     it('returns an object', async () => {
       dan.popularity = 1
-      const peopleCollection = databaseClient
-        .db('peoplenotplatforms')
-        .collection('people')
+      const peopleCollection = databaseClient.db.collection('people')
       const { insertedId } = await peopleCollection.insertOne({
         ...dan,
         creator: 'fakeUserId'

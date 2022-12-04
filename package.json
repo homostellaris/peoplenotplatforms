@@ -25,13 +25,13 @@
     "name": "Daniel Metcalfe",
     "email": "mrdanielmetcalfe@gmail.com"
   },
-  "ci-like": "yarn workspace @peoplenotplatforms/client build && yarn lint && CI=true yarn workspaces run test && CI=true start-server-and-test start:dev http://localhost:4000",
   "scripts": {
+    "ci-like": "yarn workspace @peoplenotplatforms/client build && yarn lint && CI=true yarn workspaces run test && CI=true start-server-and-test start:dev http://localhost:4000",
     "create-people": "./habitat.sh node cypress/plugins/fixtureCreator.js createPeople",
-    "e2e": "start-server-and-test start:dev http://localhost:4000",
-    "start:dev": "vercel dev --listen 4000",
+    "e2e": "start-server-and-test start:dev http://localhost:4001",
+    "start:dev": "vercel dev --listen 4001",
     "lint": "eslint client/src people/src database/src",
-    "test": "./habitat.sh cypress run --config baseUrl=http://localhost:4000",
+    "test": "./habitat.sh cypress run --config baseUrl=http://localhost:4001",
     "test:dev": "./habitat.sh cypress open"
   },
   "repository": {
