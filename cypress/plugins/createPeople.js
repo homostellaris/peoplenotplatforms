@@ -16,10 +16,9 @@ async function createPeople(databaseClient) {
       popularity: i
     })
   }
-  const result = await databaseClient.db.collection('people').insertMany(dans)
-  const people = result.ops
+  await databaseClient.db.collection('people').insertMany(dans)
 
-  return people
+  return dans
 }
 
 module.exports = createPeople

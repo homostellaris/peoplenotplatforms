@@ -44,10 +44,9 @@ module.exports = async (on, config) => {
 
       if (!fixture.popularity) fixture.popularity = 1
 
-      const result = await peopleCollection.insertOne(fixture)
-      const person = result.ops[0]
+      await peopleCollection.insertOne(fixture)
 
-      return person
+      return fixture
     },
     // TODO: Upgrade to 5.3.0 and use default arg: https://github.com/cypress-io/cypress/issues/5913
     async createPersonApi(args) {
@@ -80,8 +79,7 @@ module.exports = async (on, config) => {
     },
     async createUser(user) {
       const result = await usersCollection.insertOne(user)
-      const createdUser = result.ops[0]
-      return { ...createdUser, id: createdUser._id }
+      return { ...user, id: result.insertedId }
     },
     async findUser(email) {
       return usersCollection.findOne({ email })
