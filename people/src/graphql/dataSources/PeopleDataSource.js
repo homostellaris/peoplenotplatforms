@@ -12,15 +12,18 @@ class PeopleDataSource extends DataSource {
 
   async createPerson(person, userId) {
     const numberOfPeople = await this.collection.countDocuments()
-
-    const result = await this.collection.insertOne({
+    const personToInsert = {
       ...person,
       popularity: numberOfPeople + 1,
       creator: userId
-    }) // Have to shallow clone the object because insertOne mutates the original to add _id.
-    const createdPerson = result.ops[0]
+    }
 
-    return replaceMongoIdWithApplicationId(createdPerson)
+    const result = await this.collection.insertOne(personToInsert) // Have to shallow clone the object because insertOne mutates the original to add _id.
+
+    return replaceMongoIdWithApplicationId({
+      ...personToInsert,
+      _id: result.insertedId
+    })
   }
 
   async editPerson(id, person) {
@@ -59,10 +62,9 @@ class PeopleDataSource extends DataSource {
   }
 
   async getPeopleCount(query) {
-    const cursor = await this.collection.find({
+    const count = await this.collection.countDocuments({
       name: { $regex: query, $options: 'i' }
     })
-    const count = await cursor.count()
     return count
   }
 
