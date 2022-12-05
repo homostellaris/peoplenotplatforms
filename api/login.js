@@ -37,9 +37,7 @@ async function login(req, res, next) {
   }
 
   async function upsertUser(user) {
-    const usersCollection = req.app.locals.databaseClient
-      .db('peoplenotplatforms')
-      .collection('users')
+    const usersCollection = req.app.locals.databaseClient.db.collection('users')
     const result = await usersCollection.findOneAndReplace(
       { email: user.email },
       { ...user },

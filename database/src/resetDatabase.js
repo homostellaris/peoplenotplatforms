@@ -1,20 +1,18 @@
-const { MongoClient } = require('mongodb')
 const setupDatabase = require('./setupDatabase')
+const DatabaseClient = require('./DatabaseClient')
 
 async function resetDatabase(databaseUrl) {
   if (process.env.NODE_ENV === 'production') {
     throw new Error('Unsafe to reset database in production.')
   }
 
-  const mongoClient = new MongoClient(databaseUrl || process.env.MONGODB_URI)
-  await mongoClient.connect()
+  const client = await new DatabaseClient(databaseUrl)
 
   try {
-    const database = mongoClient.db('peoplenotplatforms')
-    await database.dropDatabase()
-    await setupDatabase(database)
+    await client.db.dropDatabase()
+    await setupDatabase(client.db)
   } finally {
-    mongoClient.close()
+    client.close()
   }
 }
 

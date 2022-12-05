@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient
 const parseMongoDbUri = require('./parseMongoDbUri')
 
 class DatabaseClient {
-  constructor(uriConnectionString) {
+  constructor(uriConnectionString = process.env.MONGODB_URI) {
     this.uriConnectionString = uriConnectionString
     const { hosts, database } = parseMongoDbUri(this.uriConnectionString)
     this.hosts = hosts

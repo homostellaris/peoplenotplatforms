@@ -1,12 +1,13 @@
-const databaseClient = require('@peoplenotplatforms/database')
+const database = require('@peoplenotplatforms/database')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const express = require('express')
 
 async function createServer(middleware) {
-  const { client } = await databaseClient()
+  const databaseClient = await database()
+  const mongoClient = databaseClient.client
   const expressServer = express()
-  expressServer.locals.databaseClient = client
+  expressServer.locals.databaseClient = databaseClient
 
   expressServer.use(
     session({
@@ -14,7 +15,7 @@ async function createServer(middleware) {
       saveUninitialized: true,
       secret: process.env.SESSION_SECRET,
       store: MongoStore.create({
-        client
+        client: mongoClient
       })
     })
   )
