@@ -87,7 +87,7 @@ To be filled in.
 The staging environment must be manually promoted to production.
 
 # Analytics
-Segment is used for analytics. For it to work a SEGMENT_WRITE_KEY environment variable must be set as well as NODE_ENV (see `client/public/analytics.js`).
+Plausible is used for analytics.
 
 # Ubiquitous language
 

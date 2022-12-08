@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
+import analytics from '../analytics'
 import Save from '../common/Save'
 import Person from './Person'
 import PersonBuilder from './PersonBuilder'
@@ -27,7 +28,7 @@ function PersonEditor(props) {
   // TODO: Try mutation onCompleted callback instead?
   if (editPersonResult.data) {
     const id = editPersonResult.data.editPerson.id
-    window.analytics.track('Edited person', { id })
+    analytics.track('Edited person', { id })
     return <Redirect to={`/person/${id}`} />
   }
 

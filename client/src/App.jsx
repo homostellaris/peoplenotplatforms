@@ -1,6 +1,6 @@
 import { createBrowserHistory } from 'history'
 import React from 'react'
-import { CookiesProvider } from 'react-cookie' // TODO: Decide if this is still necessary
+import { CookiesProvider } from 'react-cookie'; // TODO: Decide if this is still necessary
 import { Route, Router, Switch } from 'react-router-dom'
 import About from './About'
 import Attributions from './Attributions'
@@ -11,9 +11,6 @@ import PersonViewer from './Person/PersonViewer'
 import Privacy from './Privacy'
 
 const history = createBrowserHistory()
-history.listen(() => {
-  window.analytics.page()
-})
 
 function App(props) {
   return (

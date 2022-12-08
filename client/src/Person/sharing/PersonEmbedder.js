@@ -1,6 +1,7 @@
 import Emoji from 'a11y-react-emoji'
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
+import analytics from '../../analytics'
 import copyIcon from '../../common/icons/copy.svg'
 import './sharing.css'
 
@@ -43,7 +44,7 @@ function PersonEmbedder(props) {
           className="copy-button"
           onClick={() => {
             copySharingLink()
-            window.analytics.track('Copied sharing link', { id })
+            analytics.track('Copied sharing link', { id })
           }}
         >
           <img alt="copy icon" src={copyIcon} />

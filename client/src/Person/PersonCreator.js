@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
+import analytics from '../analytics'
 import Save from '../common/Save'
 import PersonBuilder from './PersonBuilder'
 
@@ -19,7 +20,7 @@ function PersonCreator(props) {
 
   if (data) {
     const id = data.createPerson.id
-    window.analytics.track('Created person', { id })
+    analytics.track('Created person', { id })
     return <Redirect to={`/person/${id}`} />
   }
 

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import analytics from '../analytics'
 import MailIcon from '../common/MailIcon'
 import PlatformIcon from './PlatformIcon'
 import usePlatformName from './usePlatformName'
@@ -38,7 +39,7 @@ function ValidProfile(props) {
 
 function trackAction(url, platformName) {
   return () => {
-    window.analytics.track('Clicked profile', {
+    analytics.track('Clicked profile', {
       url,
       platformName
     })
