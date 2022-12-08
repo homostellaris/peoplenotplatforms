@@ -1,12 +1,12 @@
 const parseMongoDbUri = require('./parseMongoDbUri')
 
-describe('when a valid Heroku mLab MongoDB URI is passed in', () => {
+describe('when a valid MongoDB URI is passed in', () => {
   describe('when the URI contains the username and password', () => {
     let clientOptions
 
     beforeAll(() => {
       clientOptions = parseMongoDbUri(
-        'mongodb://heroku_12345678:random_password@ds029017.mLab.com:29017/heroku_12345678'
+        'mongodb://foo_12345678:random_password@ds029017.mLab.com:29017/foo_12345678'
       )
     })
 
@@ -15,7 +15,7 @@ describe('when a valid Heroku mLab MongoDB URI is passed in', () => {
     })
 
     it('returns the username', () => {
-      expect(clientOptions.username).toEqual('heroku_12345678')
+      expect(clientOptions.username).toEqual('foo_12345678')
     })
 
     it('returns the password', () => {
@@ -29,7 +29,7 @@ describe('when a valid Heroku mLab MongoDB URI is passed in', () => {
     })
 
     it('returns the database', () => {
-      expect(clientOptions.database).toEqual('heroku_12345678')
+      expect(clientOptions.database).toEqual('foo_12345678')
     })
   })
 
